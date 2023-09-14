@@ -43,5 +43,18 @@ pipeline {
                     }
                 }
             }
+            stage('Build Image') {
+                steps {
+                    copyArtifacts filter: 'target/*.jar',
+                                    fingerprintArtifacts: true,
+                                    projectName: '${JOB_NAME}',
+                                    flatten: true,
+                                    selector: specific('${BUILD_NUMBER}'),
+                                    target: 'build/libs/'
+                    sh 'docker --version'
+                    sh 'docker-compose --version'
+                    sh 'docker-compose build'
+                }
+            }
         }
     }
