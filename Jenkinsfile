@@ -7,7 +7,7 @@ pipeline {
             steps {
 
                 git credentialsId: 'github-credentials',
-                    url: 'https://github.com/aematosy/galaxy-examen-final-matos-adrian.git',
+                    url: 'https://github.com/aematosy/galaxy-examen-final-matos-yaranga-adrian.git',
                     branch: 'main'
 
                 sh 'mvn package'
