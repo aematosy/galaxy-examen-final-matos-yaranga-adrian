@@ -46,12 +46,7 @@ pipeline {
         stage('Build Image') {
             steps {
                 echo 'Building..'
-                copyArtifacts filter: 'target/*.jar',
-                                    fingerprintArtifacts: true,
-                                    projectName: '${JOB_NAME}',
-                                    flatten: true,
-                                    selector: specific('${BUILD_NUMBER}'),
-                                    target: 'target';
+                    sh 'docker ps'
                     sh 'docker-compose build'
             }
         }
