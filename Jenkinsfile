@@ -43,9 +43,17 @@ pipeline {
                     }
                 }
             }
-        stage('Test adrian') {
+        stage('Build Image') {
             steps {
                 echo 'Building..'
+                copyArtifacts filter: 'target/*.jar',
+                                    fingerprintArtifacts: true,
+                                    projectName: '${JOB_NAME}',
+                                    flatten: true,
+                                    selector: specific('${BUILD_NUMBER}'),
+                                    target: 'build/libs/'
+                    sh 'docker-compose --version'
+                    sh 'docker-compose build'
             }
         }
         }
